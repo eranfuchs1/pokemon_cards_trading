@@ -1,6 +1,9 @@
 import requests
 
 
+url = 'https://pokeapi.co/api/v2/pokemon/'
+
+
 def get_json(url):
     return requests.get(url).json()
 
