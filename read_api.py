@@ -4,12 +4,15 @@ import requests
 url = 'https://pokeapi.co/api/v2/pokemon/'
 
 
-def get_json(url):
-    return requests.get(url).json()
+def get_req_json_status(url):
+    req_obj = requests.get(url)
+    json_obj = req_obj.json()
+    status_code = req_obj.status_code
+    return req_obj, json_obj, status_code
 
 
 def iterate_with_id(url, id_beg=0):
-    json_obj = get_json(f'{url}{id_beg}')
-    while json_obj:
+    req_obj, json_obj, status_code = get_req_json_status(f'{url}{id_beg}')
+    while status_code == 200:
         id_beg += 1
-        json_obj = get_json(f'{url}{id_beg}')
+        req_obj, json_obj, status_code = get_req_json_status(f'{url}{id_beg}')
