@@ -25,7 +25,10 @@ def card_collection_view(request):
     return render(request, 'card_collection.html', context=context)
 def card_trade_posting_view(request):
     context = {}
-    context['user_owned_cards'] = UserOwnedCards.objects.get(user=request.user)
+    try:
+        context['user_owned_cards'] = UserOwnedCards.objects.get(user=request.user.id)
+    except UserOwnedCards.DoesNotExist:
+        pass
     context['nav_links'] = nav_links
     context['title'] = 'Trade Posting'
     context['form'] = PostTradeModelForm()
