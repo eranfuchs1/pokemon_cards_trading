@@ -16,7 +16,10 @@ from .trade_offer import accept_and_remove, accept_trade_offer, post_trade, post
 from .models import Card, TradeOffer, TradePosting, UserOwnedCards
 def card_collection_view(request):
     context = {}
-    context['user_owned_cards'] = UserOwnedCards.objects.get(user=request.user)
+    try:
+        context['user_owned_cards'] = UserOwnedCards.objects.get(user=request.user.id)
+    except UserOwnedCards.DoesNotExist:
+        pass
     context['nav_links'] = nav_links
     context['title'] = 'Your Cards Collection'
     return render(request, 'card_collection.html', context=context)
