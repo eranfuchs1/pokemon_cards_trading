@@ -4,7 +4,7 @@ from .forms import OfferTradeModelForm, PostTradeModelForm, TradeOfferAcceptMode
 from django.shortcuts import render, redirect
 
 # Create your views here.
-nav_links = ['homepage', ]
+nav_links = ['homepage', 'card_collection', ]
 
 
 def homepage_view(request):
