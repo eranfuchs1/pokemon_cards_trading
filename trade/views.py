@@ -2,6 +2,7 @@ from .models import Card, TradeOffer, TradePosting, UserOwnedCards
 from .trade_offer import accept_and_remove, accept_trade_offer, post_trade, post_trade_offer, remove_trade_posting
 from .forms import OfferTradeModelForm, PostTradeModelForm, TradeOfferAcceptModelForm
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 nav_links = ['homepage', 'card_collection', ]
@@ -14,6 +15,7 @@ def homepage_view(request):
     return render(request, 'homepage.html', context=context)
 
 
+@login_required
 def card_collection_view(request):
     context = {}
     try:
@@ -26,6 +28,7 @@ def card_collection_view(request):
     return render(request, 'card_collection.html', context=context)
 
 
+@login_required
 def card_trade_posting_view(request):
     context = {}
     try:
