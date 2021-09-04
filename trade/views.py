@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-nav_links = ['homepage', 'card_collection', 'trade_posting', ]
+nav_links = ['homepage', 'card_collection', 'trade_posting', 'trade_posts', ]
 
 
 def homepage_view(request):
@@ -44,5 +44,16 @@ def card_trade_posting_view(request):
     elif request.method == 'POST':
         form = PostTradeModelForm(request.POST)
         if form.is_valid():
+            trade_posting = form.save(commit=False)
+            trade_posting.trade_poster = request.user
+            trade_posting.save()
             form.save()
         return redirect('homepage')
+
+
+def trade_posts_view(request):
+    context = {}
+    context['nav_links'] = nav_links
+    context['title'] = 'Trade Posts'
+    context['trade_posts'] = TradePosting.objects.all()
+    return render(request, 'trade_posts.html', context=context)
