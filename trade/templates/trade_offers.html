@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for trade_post in trade_posts %}
+{{trade_post.id}}
+<br>
+<h3>
+cards posted:
+</h3>
+{% for card in trade_post.cards_posted.all %}
+{% include 'card.html' with card=card %}
+{% endfor %}
+<h3>
+trade offers:
+</h3>
+{% for trade_offer in trade_post.trade_offers.all %}
+{{trade_offer.id}}
+<br>
+{% for card in trade_offer.cards_offered.all %}
+{% include 'card.html' with card=card %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endblock content %}

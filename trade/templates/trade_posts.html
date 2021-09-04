@@ -4,7 +4,7 @@
 {{trade_post.trade_poster.username}}
 <br>
 {% for card in trade_post.cards_posted.all %}
-{{card.name}}
+{% include 'card.html' with card=card %}
 <br>
 {% endfor %}
 {% endfor %}
