@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-nav_links = ['homepage', 'card_collection', ]
+nav_links = ['homepage', 'card_collection', 'trade_posting', ]
 
 
 def homepage_view(request):
