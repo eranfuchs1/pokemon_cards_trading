@@ -12,7 +12,7 @@ def get_req_json_status(url):
     return req_obj, json_obj, status_code
 
 
-def iterate_with_id(url, id_beg=0, func_for_json):
+def iterate_with_id(url, func_for_json, id_beg=0):
     req_obj, json_obj, status_code = get_req_json_status(f'{url}{id_beg}')
     while status_code == 200:
         func_for_json(json_obj)
